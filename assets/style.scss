@@ -1,5 +1,11 @@
-.form-container {
-    width: 50%;
+header,
+footer,
+main {
+    padding: 1rem;
+}
+
+.container {
+    width: 60%;
     margin-left: auto;
     margin-right: auto;
     display: flex;

@@ -1,23 +1,29 @@
-.form-container {
-  width: 50%;
+header,
+footer,
+main {
+  padding: 1rem;
+}
+
+.container {
+  width: 60%;
   margin-left: auto;
   margin-right: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.form-container #feedback {
+.container #feedback {
   text-align: center;
   font-size: 1.5rem;
   color: crimson;
   font-weight: 600;
 }
-.form-container form {
+.container form {
   width: 100%;
 }
-.form-container form input {
+.container form input {
   width: 80%;
 }
-.form-container form #password-info {
+.container form #password-info {
   font-size: 0.9rem;
 }/*# sourceMappingURL=style.css.map */

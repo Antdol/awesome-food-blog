@@ -1,5 +1,6 @@
 <?php
 session_start();
+include_once("./displayMsg.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,20 +9,20 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <?php include_once("style.php"); ?>
+    <?php include_once("./style.php"); ?>
 </head>
 
 <body>
     <header>
-        <?php include_once("header.php"); ?>
+        <?php include_once("./header.php"); ?>
     </header>
     <main>
-        <div class="form-container">
+        <div class="container">
             <p id="feedback">
                 <?php
-                if (isset($_SESSION["registerMsg"]))
+                if (isset($_SESSION["msg"]))
                 {
-                    echo $_SESSION["registerMsg"];
+                    echo $_SESSION["msg"];
                 }
                 ?>
             </p>

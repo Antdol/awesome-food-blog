@@ -1,15 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION["display"]))
-{
-    unset($_SESSION["registerMsg"]);
-    unset($_SESSION["display"]);
-}
-if (isset($_SESSION["registerMsg"]) && !isset($_SESSION["display"]))
-{
-    $_SESSION["display"] = true;
-}
-
+include_once("./displayMsg.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,24 +9,24 @@ if (isset($_SESSION["registerMsg"]) && !isset($_SESSION["display"]))
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <?php include_once("style.php"); ?>
+    <?php include_once("./style.php"); ?>
 </head>
 
 <body>
     <header>
-        <?php include_once("header.php"); ?>
+        <?php include_once("./header.php"); ?>
     </header>
     <main>
-        <div class="form-container">
+        <div class="container">
             <p id="feedback">
                 <?php
-                if (isset($_SESSION["registerMsg"]))
+                if (isset($_SESSION["msg"]))
                 {
-                    echo $_SESSION["registerMsg"];
+                    echo $_SESSION["msg"];
                 }
                 ?>
             </p>
-            <form action="handleRegister.php" method="post">
+            <form action="handleLogin.php" method="post">
                 <h2>Login form</h2>
                 <label for="email">Email address</label>
                 <input type="email" name="email" id="email" autofocus autocomplete="off">

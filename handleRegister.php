@@ -20,7 +20,7 @@ if (isset($_POST["register"]))
         // Check if email is of valid format
         if (!filter_var($data["email"], FILTER_VALIDATE_EMAIL))
         {
-            $_SESSION["registerMsg"] = "Please enter a valid email address";
+            $_SESSION["msg"] = "Please enter a valid email address";
             header("location: register.php");
             exit;
         }
@@ -29,7 +29,7 @@ if (isset($_POST["register"]))
         $pw = $data["password"];
         if ($pw != $data["passwordConfirm"])
         {
-            $_SESSION["registerMsg"] = "Password does not match confirmation";
+            $_SESSION["msg"] = "Password does not match confirmation";
             header("location: register.php");
             exit;
         }
@@ -44,14 +44,10 @@ if (isset($_POST["register"]))
             && preg_match($lowerCaseRegex, $pw) && preg_match($numberRegex, $pw)
             && strlen($pw) >= 5))
         {
-            $_SESSION["registerMsg"] = "Your password does not fit the requirements";
+            $_SESSION["msg"] = "Your password does not fit the requirements";
             header("location: register.php");
             exit;
         }
-
-
-
-
 
         // Check if email already exists in db
         $selectQuery = "SELECT * FROM users WHERE email = :email";
@@ -61,11 +57,10 @@ if (isset($_POST["register"]))
 
         if (!empty($user))
         {
-            $_SESSION["registerMsg"] = "The email address you entered is already used";
+            $_SESSION["msg"] = "The email address you entered is already used";
             header("location: register.php");
             exit;
         }
-
 
         // Create user in db as everything checks out
         $insertQuery = "INSERT INTO users(name, email, password) VALUES(:name, :email, :password)";
@@ -76,9 +71,12 @@ if (isset($_POST["register"]))
             "password" => hash("sha256", $pw)
         ]);
 
-
         // Redirect user to login page
-        $_SESSION["registerMsg"] = "You have successfully registered!";
+        $_SESSION["msg"] = "You have successfully registered!";
         header("location: login.php");
     }
+}
+else
+{
+    header("location: register.php");
 }

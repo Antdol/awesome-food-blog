@@ -1,5 +1,15 @@
 <?php
 session_start();
+if (isset($_SESSION["display"]))
+{
+    unset($_SESSION["registerMsg"]);
+    unset($_SESSION["display"]);
+}
+if (isset($_SESSION["registerMsg"]) && !isset($_SESSION["display"]))
+{
+    $_SESSION["display"] = true;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,7 +17,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Login</title>
     <?php include_once("style.php"); ?>
 </head>
 
@@ -26,21 +36,12 @@ session_start();
                 ?>
             </p>
             <form action="handleRegister.php" method="post">
-                <h2>Register form</h2>
+                <h2>Login form</h2>
                 <label for="email">Email address</label>
                 <input type="email" name="email" id="email" autofocus autocomplete="off">
-                <label for="name">Name</label>
-                <input type="text" name="name" id="name" autocomplete="off">
                 <label for="password">Password</label>
                 <input type="password" name="password" id="password">
-                <p id="password-info">
-                    Password must contain at least 1 uppercase letter,
-                    1 lowercase letter, 1 number and 1 of &#%!:/;.,?$€
-                    and be 5 or more characters long.
-                </p>
-                <label for="passwordConfirm">Confirm password</label>
-                <input type="password" name="passwordConfirm" id="passwordConfirm">
-                <button type="submit" name="register">Register</button>
+                <button type="submit" name="login">Login</button>
             </form>
 
         </div>

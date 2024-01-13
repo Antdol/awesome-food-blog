@@ -2,6 +2,16 @@
     width: 50%;
     margin-left: auto;
     margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    #feedback {
+        text-align: center;
+        font-size: 1.5rem;
+        color: crimson;
+        font-weight: 600;
+    }
 
     form {
         width: 100%;
@@ -9,6 +19,9 @@
         input {
             width: 80%;
         }
+
+        #password-info {
+            font-size: 0.9rem;
+        }
     }
 }
-

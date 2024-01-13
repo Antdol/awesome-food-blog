@@ -1,17 +1,26 @@
-<?php
-session_start();
-?>
 <h1>Awesome food blog</h1>
 <nav>
     <div class="left">
-        <a href="index.php">Home</a>
+        <ul>
+            <li><a href="index.php">Home</a></li>
+        </ul>
+
     </div>
     <div class="right">
-        <?php if (isset($_SESSION["loggedIn"])) : ?>
-            <a href="logout.php">Log out</a>
-        <?php else : ?>
-            <a href="register.php">Register</a>
-            <a href="login.php">Login</a>
-        <?php endif; ?>
+        <ul>
+            <?php if (isset($_SESSION["loggedIn"])) : ?>
+                <li>
+                    <a href="logout.php">Log out</a>
+                </li>
+            <?php else : ?>
+                <li>
+                    <a href="register.php">Register</a>
+                </li>
+                <li>
+                    <a href="login.php">Login</a>
+                </li>
+            <?php endif; ?>
+        </ul>
+
     </div>
 </nav>

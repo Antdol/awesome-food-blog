@@ -1,0 +1,11 @@
+.form-container {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.form-container form {
+  width: 100%;
+}
+.form-container form input {
+  width: 80%;
+}/*# sourceMappingURL=style.css.map */

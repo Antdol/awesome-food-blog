@@ -4,8 +4,8 @@
         <ul>
             <li><a href="index.php">Home</a></li>
             <?php if (isset($_SESSION["loggedIn"])) : ?>
-                <li><a href="myrecipes.php">My recipes</a></li>
                 <li><a href="allRecipes.php">All recipes</a></li>
+                <li><a href="myrecipes.php">My recipes</a></li>
             <?php endif; ?>
         </ul>
 

@@ -1,16 +1,16 @@
 <?php
 session_start();
-require_once "./connection.php";
+require_once "/config/connection.php";
 include_once "./displayMsg.php";
-if (!isset($_SESSION["loggedIn"]))
-{
+if (!isset($_SESSION["loggedIn"])) {
     header("location: index.php");
     exit;
 }
 
 $selectQuery = "SELECT * FROM recipes WHERE user_id = :id";
 $selectStatement = $mysqlClient->prepare($selectQuery);
-$selectStatement->execute(["id" => $_SESSION["loggedIn"]["id"]]);
+$selectStatement->bindValue("id", $_SESSION["loggedIn"]["id"], PDO::PARAM_INT);
+$selectStatement->execute();
 $recipes = $selectStatement->fetchAll();
 
 ?>

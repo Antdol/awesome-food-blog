@@ -1,44 +1,37 @@
 <?php
 session_start();
-include_once("./connection.php");
+require_once "/config/connection.php";
 include_once("./displayMsg.php");
 
 // Redirect if user not logged in
-if (!isset($_SESSION["loggedIn"]))
-{
+if (!isset($_SESSION["loggedIn"])) {
     header("location: index.php");
     exit;
 }
 
 // Check for form submission
-if (isset($_POST["submitRecipe"]))
-{
+if (isset($_POST["submitRecipe"])) {
     $data = [];
 
     // Sanitize data posted by user
-    foreach ($_POST as $key => $value)
-    {
+    foreach ($_POST as $key => $value) {
         $data[$key] = htmlspecialchars(strip_tags(trim($value)));
     }
 
     // Check if both fields are not empty
-    if (!empty($data["title"]) && !empty($data["content"]))
-    {
+    if (!empty($data["title"]) && !empty($data["content"])) {
         // Insert new recipe into db
         $insertQuery = "INSERT INTO recipes(title, content, user_id) 
                         VALUES(:title, :content, :user_id)";
         $insertStatement = $mysqlClient->prepare($insertQuery);
-        $insertStatement->execute([
-            "title" => $data["title"],
-            "content" => $data["content"],
-            "user_id" => $_SESSION["loggedIn"]["id"]
-        ]);
+        $insertStatement->bindValue("title", $data["title"], PDO::PARAM_STR);
+        $insertStatement->bindValue("content", $data["content"], PDO::PARAM_STR);
+        $insertStatement->bindValue("user_id", $_SESSION["loggedIn"]["id"], PDO::PARAM_INT);
+        $insertStatement->execute();
 
         header("location: myrecipes.php");
         exit;
-    }
-    else
-    {
+    } else {
         $_SESSION["msg"] = "You must fill in both fiels";
         header("location: createRecipe.php");
         exit;
@@ -64,8 +57,7 @@ if (isset($_POST["submitRecipe"]))
         <div class="container">
             <p id="feedback">
                 <?php
-                if (isset($_SESSION["msg"]))
-                {
+                if (isset($_SESSION["msg"])) {
                     echo $_SESSION["msg"];
                 }
                 ?>

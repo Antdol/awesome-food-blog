@@ -1,15 +1,13 @@
 <?php
 session_start();
-require_once "./connection.php";
-if (!isset($_SESSION["loggedIn"]))
-{
+require_once "/config/connection.php";
+if (!isset($_SESSION["loggedIn"])) {
     header("location: index.php");
     exit;
 }
 
 $selectQuery = "SELECT * FROM recipes";
-$selectStatement = $mysqlClient->prepare($selectQuery);
-$selectStatement->execute();
+$selectStatement = $mysqlClient->query($selectQuery);
 $recipes = $selectStatement->fetchAll(PDO::FETCH_ASSOC);
 
 ?>

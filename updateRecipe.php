@@ -1,35 +1,31 @@
 <?php
 session_start();
-require_once "./connection.php";
+require_once "/config/connection.php";
 
-if (isset($_GET["id"]))
-{
+if (isset($_GET["id"])) {
     $selectQuery = "SELECT * FROM recipes WHERE recipe_id = :id";
     $selectStatement = $mysqlClient->prepare($selectQuery);
-    $selectStatement->execute(["id" => $_GET["id"]]);
+    $selectStatement->bindValue('id', $_GET["id"], PDO::PARAM_INT);
+    $selectStatement->execute();
     $recipe = $selectStatement->fetch(PDO::FETCH_ASSOC);
 
-    if (!$recipe || !isset($_SESSION["loggedIn"]))
-    {
+    if (!$recipe || !isset($_SESSION["loggedIn"])) {
         header("location: index.php");
     }
 }
 
-if (isset($_POST["submit"]))
-{
+if (isset($_POST["submit"])) {
     $data = [];
-    foreach ($_POST as $key => $value)
-    {
+    foreach ($_POST as $key => $value) {
         $data[$key] = htmlspecialchars(strip_tags(trim($value)));
     }
 
     $updateQuery = "UPDATE recipes SET title = :title, content = :content WHERE recipe_id = :id";
     $updateStatement = $mysqlClient->prepare($updateQuery);
-    $updateStatement->execute([
-        "title" => $data["title"],
-        "content" => $data["content"],
-        "id" => $data["recipe_id"]
-    ]);
+    $updateStatement->bindValue("title", $data["title"], PDO::PARAM_STR);
+    $updateStatement->bindValue("content", $data["content"], PDO::PARAM_STR);
+    $updateStatement->bindValue("id", $data["recipe_id"], PDO::PARAM_INT);
+    $updateStatement->execute();
     header("location: myrecipes.php");
     exit;
 }

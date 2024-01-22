@@ -1,10 +1,9 @@
 <?php
 session_start();
-include_once("./connection.php");
+require_once "/config/connection.php";
 
 $selectQuery = "SELECT * FROM recipes WHERE featured = true";
-$selectStatement = $mysqlClient->prepare($selectQuery);
-$selectStatement->execute();
+$selectStatement = $mysqlClient->query($selectQuery);
 $featuredRecipe = $selectStatement->fetch(PDO::FETCH_ASSOC);
 
 $date = new DateTime();

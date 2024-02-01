@@ -1,7 +1,7 @@
 <?php
 session_start();
 // Include connection to db
-require_once "/config/connection.php";
+require_once "connection.php";
 
 // If form is submitted
 if (isset($_POST["register"])) {

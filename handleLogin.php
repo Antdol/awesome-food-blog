@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "/config/connection.php";
+require_once "connection.php";
 
 // Check for form submission
 if (isset($_POST["login"])) {

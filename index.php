@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "/config/connection.php";
+require_once "connection.php";
 
 $selectQuery = "SELECT * FROM recipes WHERE featured = true";
 $selectStatement = $mysqlClient->query($selectQuery);

@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "/config/connection.php";
+require_once "connection.php";
 
 if (isset($_GET["id"])) {
     $selectQuery = "SELECT * FROM recipes WHERE recipe_id = :id";

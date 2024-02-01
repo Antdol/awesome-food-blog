@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "/config/connection.php";
+require_once "connection.php";
 include_once("./displayMsg.php");
 
 // Redirect if user not logged in

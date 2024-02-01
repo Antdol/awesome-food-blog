@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "/config/connection.php";
+require_once "connection.php";
 if (isset($_POST["recipe_id"])) {
     $data = [];
     foreach ($_POST as $key => $value) {
